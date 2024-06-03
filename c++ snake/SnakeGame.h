@@ -25,18 +25,6 @@ struct DynamicObject {
 	bool isDisappeared = false;
 };
 
-struct NormalFood {
-	Position pos;
-	int score = 1;
-	bool isDisappeared = false;
-};
-
-struct SpecialFood {
-	Position pos;
-	int score;
-	bool isDisappeared = false;
-};
-
 class SnakeGame 
 {
 private:
@@ -45,19 +33,32 @@ private:
 	int width;
 	int height;
 	int score = 0;
+	int foodscore = 1;
+	int specialfoodscore;
 	int maxscore;
+	chrono::time_point<chrono::steady_clock> specialFoodGenerateTime;
+	const chrono::seconds specialFoodLifeTime = chrono::seconds(6);
 	bool isUseable = false;
 	bool isGameOver = false;
 	vector<Position> snake;
 	vector<StaticObject> sto;
-	NormalFood food;
-	SpecialFood sfood;
+	Position food;
+	Position sfood;
+	
+	bool IsObstacle(Position pos);
+	bool IsSnake(Position pos);
+	bool IsSpecialFood(Position pos);
+	bool IsFood(Position pos);
+	void generateFood();
+	void generateSpecialFood();
+	bool isGenerateSpecialFood = false;
+	bool isGenerateFood = true;
+	void updateSpecialFoodScore();
+	void setIsGenerateSpecialFood(bool is_generate_special_food);
+	void setIsGenerateFood(bool is_generate_food);
 public:
 	SnakeGame(int blocksize, int linesize, int width, int height);
 	void draw();
-	void generateFood(NormalFood& food);
-	void generateSpecialFood();
-	void updateSpecialFoodScore();
 	void snakeMove();
 	void setIsGameOver(bool is_game_over);
 	bool IsGameOver();

@@ -7,6 +7,8 @@
 #include <graphics.h>
 #include <cmath>
 #include <windows.h>
+#include <chrono>
+#include <conio.h>
 
 using namespace std;
 
