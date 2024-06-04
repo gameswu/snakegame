@@ -106,6 +106,7 @@ void page1(int& value)
 		getMousePosition();
 		if (defaultbutton.isClicked())
 		{
+			value = 4;
 			break;
 		}
 		if (mapbutton.isClicked())
@@ -192,5 +193,17 @@ void page3(int& value)
 
 void page4(int& value)
 {
-
+	//”√inputbox ‰»ÎµÿÕº≥ﬂ¥Áwidth,height
+	char widthstr[5];
+	char heightstr[5];
+	char blocksize[5];
+	int width, height, blocksizeint;
+    InputBox(widthstr, 5, "Input the map width");
+    InputBox(heightstr, 5, "Input the map height");
+    InputBox(blocksize, 5, "Input the block size");
+	width = atoi(widthstr);
+	height = atoi(heightstr);
+	blocksizeint = atoi(blocksize);
+	value = 1;
+	return pages(value);
 }

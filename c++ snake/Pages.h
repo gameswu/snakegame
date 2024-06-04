@@ -1,7 +1,7 @@
 #ifndef PAGES_H
 #define PAGES_H
 
-#include "Buttons.h"
+#include "SnakeGame.h"
 
 void pages(int& pagenum);
 

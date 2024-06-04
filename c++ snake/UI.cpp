@@ -87,7 +87,7 @@ void Button::draw()
 // 实现按钮类的鼠标点击判断函数
 bool Button::isClicked()
 {
-    if (boolIsMouseOn() && mouse.mkLButton)
+    if (boolIsMouseOn() && mouse.uMsg == WM_LBUTTONDOWN)
     {
         return true;
     }

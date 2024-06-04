@@ -1,7 +1,4 @@
 #include "Pages.h"
-#include <conio.h>
-#include <stdio.h>
-#include <iostream>
 
 int main() {
 	initialfiles();

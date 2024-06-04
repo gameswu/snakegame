@@ -9,6 +9,8 @@
 #include <windows.h>
 #include <chrono>
 #include <conio.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
