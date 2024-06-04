@@ -205,6 +205,21 @@ void SnakeGame::playerinput()
 			direction = 3;
 			Useabletimes++;
 			break;
+		case 'p':
+		case 'P':
+			MessageBox(NULL, _T("Press P again to continue"), _T("Pause"), MB_OK);
+			while (true)
+			{
+				if (_kbhit())
+				{
+					char ch = _getch();
+					if (ch == 'p' || ch == 'P')
+					{
+						break;
+					}
+				}
+			}
+			break;
 		}
 	}
 }
