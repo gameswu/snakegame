@@ -33,7 +33,7 @@ MapSnakeGame::MapSnakeGame(int width, int height, int blocksize) : SnakeGame(wid
 {
 }
 
-void SnakeGame::setAll(int width, int height, int blocksize, double speed, double difficulty)
+void SnakeGame::setAll(int width, int height, int blocksize)
 {
 	//设置游戏参数
 	if (width * blocksize > MAX_WIDTH || height * blocksize > MAX_HEIGHT)
@@ -72,24 +72,10 @@ void SnakeGame::setAll(int width, int height, int blocksize, double speed, doubl
 	specialfood = { -1,-1 };
 	isGameOver = false;
 	LastsfoodPlaceTime = chrono::system_clock::now();
-	setspeed(speed);
-	setdifficulty(difficulty);
+	speed = stod(speedstr);
+	difficulty = stod(difficultystr);
 	placefood();
 	placespecialfood();
-}
-
-void SnakeGame::setspeed(double speed)
-{
-	//设置游戏速度
-	speed = stod(speedstr);
-	this->speed = speed;
-}
-
-void SnakeGame::setdifficulty(double difficulty)
-{
-	//设置游戏难度
-	difficulty = stod(difficultystr);
-	this->difficulty = difficulty;
 }
 
 void SnakeGame::drawmap()
@@ -521,8 +507,8 @@ void MapSnakeGame::loadmap(string filename)
 	specialfood = { -1,-1 };
 	isGameOver = false;
 	LastsfoodPlaceTime = chrono::system_clock::now();
-	setspeed(speed);
-	setdifficulty(difficulty);
+	speed = stod(speedstr);
+	difficulty = stod(difficultystr);
 	placefood();
 	placespecialfood();
 }

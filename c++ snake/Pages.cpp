@@ -152,7 +152,7 @@ void page2(int& value)
 	width = atoi(widthstr);
 	height = atoi(heightstr);
 	blocksizeint = 20;
-	editsg.setAll(width, height, blocksizeint, 1, 1);
+	editsg.setAll(width, height, blocksizeint);
 	editsg.setonlymap();
 	while (true)
 	{
@@ -241,7 +241,7 @@ void page4(int& value)
 	width = atoi(widthstr);
 	height = atoi(heightstr);
 	blocksizeint = atoi(blocksize);
-	defaultsg.setAll(width, height, blocksizeint, 1, 1);
+	defaultsg.setAll(width, height, blocksizeint);
 	defaultsg.loadscore("D");
 	while (true)
 	{
@@ -310,7 +310,7 @@ void page6(int& value)
 	width = atoi(widthstr);
 	height = atoi(heightstr);
 	blocksizeint = atoi(blocksize);
-	randomsg.setAll(width, height, blocksizeint, 1, 1);
+	randomsg.setAll(width, height, blocksizeint);
 	randomsg.loadscore("R");
 	randomsg.placeobstacle();
 	randomsg.placefood();
@@ -351,7 +351,7 @@ void page7(int& value)
 	width = atoi(widthstr);
 	height = atoi(heightstr);
 	blocksizeint = atoi(blocksize);
-	gravitysg.setAll(width, height, blocksizeint, 1, 1);
+	gravitysg.setAll(width, height, blocksizeint);
 	gravitysg.loadscore("G");
 	gravitysg.setmovetime();
 	gravitysg.placeobstacle();
