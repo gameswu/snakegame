@@ -1,6 +1,7 @@
 #include "SnakeGame.h"
 
 SnakeGame defaultsg(20, 20, 20);
+RandomSnakeGame randomsg(20, 20, 20);
 
 SnakeGame::SnakeGame(int width, int height, int blocksize)
 {
@@ -10,7 +11,12 @@ SnakeGame::SnakeGame(int width, int height, int blocksize)
 	snake.push_back({ width / 2, height / 2 });
 }
 
-void SnakeGame::setAll(int width, int height, int blocksize)
+RandomSnakeGame::RandomSnakeGame(int width, int height, int blocksize) : SnakeGame(width, height, blocksize)
+{
+	placeobstacle();
+}
+
+void SnakeGame::setAll(int width, int height, int blocksize, double speed, double difficulty)
 {
 	//设置游戏参数
 	this->width = blocksize * width > MAX_WIDTH ? MAX_WIDTH / (MINBLOCKSIZE + 1) : max(width, MINWIDTH);
@@ -27,14 +33,32 @@ void SnakeGame::setAll(int width, int height, int blocksize)
 	maxscore = 0;
 	lastscore = -1;
 	direction = 0;
+	is_specialfood_eff = false;
+	Useabletimes = 0;
 	snake.clear();
 	snake.push_back({ width / 2, height / 2 });
 	food = { -1,-1 };
 	specialfood = { -1,-1 };
 	isGameOver = false;
 	LastsfoodPlaceTime = chrono::system_clock::now();
+	setspeed(speed);
+	setdifficulty(difficulty);
 	placefood();
 	placespecialfood();
+}
+
+void SnakeGame::setspeed(double speed)
+{
+	//设置游戏速度
+	speed = stod(speedstr);
+	this->speed = speed;
+}
+
+void SnakeGame::setdifficulty(double difficulty)
+{
+	//设置游戏难度
+	difficulty = stod(difficultystr);
+	this->difficulty = difficulty;
 }
 
 void SnakeGame::drawmap()
@@ -121,6 +145,7 @@ void SnakeGame::playerinput()
 				break;
 			}
 			direction = 0;
+			Useabletimes++;
 			break;
 		case 'd':
 		case 'D':
@@ -129,6 +154,7 @@ void SnakeGame::playerinput()
 				break;
 			}
 			direction = 1;
+			Useabletimes++;
 			break;
 		case 's':
 		case 'S':
@@ -137,6 +163,7 @@ void SnakeGame::playerinput()
 				break;
 			}
 			direction = 2;
+			Useabletimes++;
 			break;
 		case 'a':
 		case 'A':
@@ -145,6 +172,7 @@ void SnakeGame::playerinput()
 				break;
 			}
 			direction = 3;
+			Useabletimes++;
 			break;
 		}
 	}
@@ -232,10 +260,13 @@ void SnakeGame::gameover()
 	//游戏结束，蛇头碰到蛇身,障碍物
 	if (isSnakeBody(snake[0]) || isObstacle(snake[0]))
 	{
-		isGameOver = true;
-		if (score > maxscore)
+		if (Useabletimes > 0) 
 		{
-			maxscore = score;
+			isGameOver = true;
+			if (score > maxscore)
+			{
+				maxscore = score;
+			}
 		}
 	}
 }
@@ -263,5 +294,22 @@ void SnakeGame::afterEatfood()
 	{
 		is_specialfood_eff = false;
 		specialfood = { -1,-1 };
+	}
+}
+
+void RandomSnakeGame::placeobstacle()
+{
+	//对每一格计算0~400随机数，若随机数小于difficulty*50，生成障碍物
+	srand((unsigned)time(NULL));
+	obstacles.clear();
+	for (int i = 0; i < width; i++)
+	{
+		for (int j = 0; j < height; j++)
+		{
+			if (rand() % 400 < difficulty * 50 && !isSnake({i,j}))
+			{
+				obstacles.push_back({ i,j });
+			}
+		}
 	}
 }

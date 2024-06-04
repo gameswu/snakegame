@@ -14,7 +14,7 @@ struct Position {
 
 class SnakeGame 
 {
-private:
+protected:
 	int width;
 	int height;
 	int blocksize;
@@ -33,6 +33,8 @@ public:;
 	  SnakeGame(int width, int height, int blocksize);
 	  bool isGameOver = false;
 	  double speed = 1;
+	  double difficulty = 1;
+	  int Useabletimes = 0;
 	  void drawmap();
 	  void drawother();
 	  void snakemove();
@@ -44,11 +46,21 @@ public:;
 	  bool isObstacle(Position pos);
 	  bool isSpecialFood(Position pos);
 	  bool isFood(Position pos);
+	  void setspeed(double speed);
+	  void setdifficulty(double difficulty);
 	  void gameover();
 	  void afterEatfood();
-	  void setAll(int width, int height, int blocksize);
+	  void setAll(int width, int height, int blocksize, double speed, double difficulty);
+};
+
+class RandomSnakeGame : public SnakeGame
+{
+public:
+	RandomSnakeGame(int width, int height, int blocksize);
+	void placeobstacle();
 };
 
 extern SnakeGame defaultsg;
+extern RandomSnakeGame randomsg;
 
 #endif SNAKEGAME_H

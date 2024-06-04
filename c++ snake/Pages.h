@@ -10,5 +10,7 @@ void page1(int& value);
 void page2(int& value);
 void page3(int& value);
 void page4(int& value);
+void page5(int& value);
+void page6(int& value);
 
 #endif PAGES_H

@@ -36,6 +36,18 @@ void pages(int& pagenum)
 		pagenum = val;
 		return pages(pagenum);
 	}
+	if (pagenum == 5)
+	{
+		page5(val);
+		pagenum = val;
+		return pages(pagenum);
+	}
+	if (pagenum == 6)
+	{
+		page6(val);
+		pagenum = val;
+		return pages(pagenum);
+	}
 }
 
 void page0(int& value)
@@ -115,6 +127,7 @@ void page1(int& value)
 		}
 		if (randombutton.isClicked())
 		{
+			value = 6;
 			break;
 		}
 		if (gravitybutton.isClicked())
@@ -193,6 +206,7 @@ void page3(int& value)
 
 void page4(int& value)
 {
+	Sleep(100);
 	char widthstr[5];
 	char heightstr[5];
 	char blocksize[5];
@@ -203,7 +217,7 @@ void page4(int& value)
 	width = atoi(widthstr);
 	height = atoi(heightstr);
 	blocksizeint = atoi(blocksize);
-	defaultsg.setAll(width, height, blocksizeint);
+	defaultsg.setAll(width, height, blocksizeint, 1, 1);
 	while (true)
 	{
 		BeginBatchDraw();
@@ -216,11 +230,53 @@ void page4(int& value)
 		defaultsg.gameover();
 		if (defaultsg.isGameOver)
 		{
-			MessageBox(GetHWnd(), "Game Over", "Game Over", MB_OK);
+			MessageBox(GetHWnd(), "Game Over", "Default", MB_OK);
 			value = 1;
 			break;
 		}
 		Sleep(100 / defaultsg.speed);
+		EndBatchDraw();
+	}
+	return pages(value);
+}
+
+void page5(int& value)
+{
+
+}
+
+void page6(int& value)
+{
+	Sleep(100);
+	char widthstr[5];
+	char heightstr[5];
+	char blocksize[5];
+	int width, height, blocksizeint;
+	InputBox(widthstr, 5, "Input the map width");
+	InputBox(heightstr, 5, "Input the map height");
+	InputBox(blocksize, 5, "Input the block size");
+	width = atoi(widthstr);
+	height = atoi(heightstr);
+	blocksizeint = atoi(blocksize);
+	randomsg.setAll(width, height, blocksizeint, 1, 1);
+	randomsg.placeobstacle();
+	while (true)
+	{
+		BeginBatchDraw();
+		cleardevice();
+		randomsg.snakemove();
+		randomsg.drawmap();
+		randomsg.drawother();
+		randomsg.afterEatfood();
+		randomsg.placespecialfood();
+		randomsg.gameover();
+		if (randomsg.isGameOver)
+		{
+			MessageBox(GetHWnd(), "Game Over", "Random", MB_OK);
+			value = 1;
+			break;
+		}
+		Sleep(100 / randomsg.speed);
 		EndBatchDraw();
 	}
 	return pages(value);
