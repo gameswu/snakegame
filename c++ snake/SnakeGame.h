@@ -60,7 +60,20 @@ public:
 	void placeobstacle();
 };
 
+class GravitySnakeGame : public SnakeGame
+{
+private:
+	chrono::time_point<chrono::system_clock> LastobstacleMoveTime;
+	chrono::duration<double> obstacleMoveTime = chrono::seconds(5);
+public:
+	GravitySnakeGame(int width, int height, int blocksize);
+	void setmovetime();
+	void placeobstacle();
+	void obstaclemove();
+};
+
 extern SnakeGame defaultsg;
 extern RandomSnakeGame randomsg;
+extern GravitySnakeGame gravitysg;
 
 #endif SNAKEGAME_H

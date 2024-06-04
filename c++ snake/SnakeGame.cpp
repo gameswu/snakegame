@@ -2,6 +2,7 @@
 
 SnakeGame defaultsg(20, 20, 20);
 RandomSnakeGame randomsg(20, 20, 20);
+GravitySnakeGame gravitysg(20, 20, 20);
 
 SnakeGame::SnakeGame(int width, int height, int blocksize)
 {
@@ -12,6 +13,11 @@ SnakeGame::SnakeGame(int width, int height, int blocksize)
 }
 
 RandomSnakeGame::RandomSnakeGame(int width, int height, int blocksize) : SnakeGame(width, height, blocksize)
+{
+	placeobstacle();
+}
+
+GravitySnakeGame::GravitySnakeGame(int width, int height, int blocksize) : SnakeGame(width, height, blocksize)
 {
 	placeobstacle();
 }
@@ -311,5 +317,49 @@ void RandomSnakeGame::placeobstacle()
 				obstacles.push_back({ i,j });
 			}
 		}
+	}
+}
+
+void GravitySnakeGame::placeobstacle()
+{
+	//对最顶行每一格计算0~1000随机数，若随机数小于difficulty*50，生成障碍物
+	srand((unsigned)time(NULL));
+	obstacles.clear();
+	for (int i = 0; i < width; i++)
+	{
+		for (int j = 0; j < height; j++)
+		{
+			if (rand() % 1000 < difficulty * 50 && !isSnake({ i,j }))
+			{
+				obstacles.push_back({ i,j });
+			}
+		}
+	}
+}
+
+void GravitySnakeGame::setmovetime()
+{
+	//设置障碍物移动时间
+	int time = speed / difficulty;
+	obstacleMoveTime = chrono::seconds(time);
+}
+
+void GravitySnakeGame::obstaclemove()
+{
+	//障碍物移动，每次移动一格，移动到最底行时消失
+	if (chrono::duration_cast<chrono::seconds>(chrono::system_clock::now() - LastobstacleMoveTime) > obstacleMoveTime)
+	{
+		for (int i = 0; i < obstacles.size(); i++)
+		{
+			if (obstacles[i].y == height - 1)
+			{
+				obstacles[i].y = 0;
+			}
+			else
+			{
+				obstacles[i].y++;
+			}
+		}
+		LastobstacleMoveTime = chrono::system_clock::now();
 	}
 }

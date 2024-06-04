@@ -48,6 +48,12 @@ void pages(int& pagenum)
 		pagenum = val;
 		return pages(pagenum);
 	}
+	if (pagenum == 7)
+	{
+		page7(val);
+		pagenum = val;
+		return pages(pagenum);
+	}
 }
 
 void page0(int& value)
@@ -132,6 +138,7 @@ void page1(int& value)
 		}
 		if (gravitybutton.isClicked())
 		{
+			value = 7;
 			break;
 		}
 		if (backbutton.isClicked())
@@ -277,6 +284,45 @@ void page6(int& value)
 			break;
 		}
 		Sleep(100 / randomsg.speed);
+		EndBatchDraw();
+	}
+	return pages(value);
+}
+
+void page7(int& value)
+{
+	Sleep(100);
+	char widthstr[5];
+	char heightstr[5];
+	char blocksize[5];
+	int width, height, blocksizeint;
+	InputBox(widthstr, 5, "Input the map width");
+	InputBox(heightstr, 5, "Input the map height");
+	InputBox(blocksize, 5, "Input the block size");
+	width = atoi(widthstr);
+	height = atoi(heightstr);
+	blocksizeint = atoi(blocksize);
+	gravitysg.setAll(width, height, blocksizeint, 1, 1);
+	gravitysg.setmovetime();
+	gravitysg.placeobstacle();
+	while (true)
+	{
+		BeginBatchDraw();
+		cleardevice();
+		gravitysg.snakemove();
+		gravitysg.obstaclemove();
+		gravitysg.drawmap();
+		gravitysg.drawother();
+		gravitysg.afterEatfood();
+		gravitysg.placespecialfood();
+		gravitysg.gameover();
+		if (gravitysg.isGameOver)
+		{
+			MessageBox(GetHWnd(), "Game Over", "Gravity", MB_OK);
+			value = 1;
+			break;
+		}
+		Sleep(100 / gravitysg.speed);
 		EndBatchDraw();
 	}
 	return pages(value);
