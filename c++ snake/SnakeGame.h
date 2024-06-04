@@ -40,6 +40,7 @@ public:;
 	  void snakemove();
 	  void playerinput();
 	  void placefood();
+	  void initialsnake();
 	  void placespecialfood();
 	  bool isSnake(Position pos);
 	  bool isSnakeBody(Position pos);
@@ -64,7 +65,7 @@ class GravitySnakeGame : public SnakeGame
 {
 private:
 	chrono::time_point<chrono::system_clock> LastobstacleMoveTime;
-	chrono::duration<double> obstacleMoveTime = chrono::seconds(5);
+	chrono::duration<double> obstacleMoveTime = chrono::seconds(1);
 public:
 	GravitySnakeGame(int width, int height, int blocksize);
 	void setmovetime();

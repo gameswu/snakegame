@@ -109,70 +109,6 @@ bool Button::boolIsMouseOn()
 	}
 }
 
-// 实现按钮类的设置文本函数
-void Button::setText(string text)
-{
-    this->text = text;
-}
-
-// 实现按钮类的设置文本颜色函数
-void Button::setTextColor(int text_color)
-{
-    this->text_color = text_color;
-}
-
-// 实现按钮类的设置文本大小函数
-void Button::setTextSize(int text_size)
-{
-    this->text_size = text_size;
-}
-
-// 实现按钮类的设置X坐标函数
-void Button::setX(int x)
-{
-    this->x = x;
-    this->text_x = x + width / 2;
-}
-
-// 实现按钮类的设置Y坐标函数
-void Button::setY(int y)
-{
-    this->y = y;
-    this->text_y = y + height / 2;
-}
-
-// 实现按钮类的设置宽度函数
-void Button::setWidth(int width)
-{
-    this->width = width;
-    this->text_x = x + width / 2;
-}
-
-// 实现按钮类的设置高度函数
-void Button::setHeight(int height)
-{
-    this->height = height;
-    this->text_y = y + height / 2;
-}
-
-// 实现按钮类的设置颜色函数
-void Button::setColor(int color)
-{
-    this->color = color;
-}
-
-// 实现按钮类的设置文本X坐标函数
-void Button::setTextX(int text_x)
-{
-    this->text_x = text_x;
-}
-
-// 实现按钮类的设置文本Y坐标函数
-void Button::setTextY(int text_y)
-{
-    this->text_y = text_y;
-}
-
 // 实现滑动条类的构造函数
 Slider::Slider(int x, int y, int width, int height, int color, int slider_color, int slider_button_color, int text_color, string slider_title, string slider_left_text, string slider_right_text)
 {
@@ -244,8 +180,8 @@ void Slider::draw()
 {
 	if (isClicked())
 	{
-		setSliderButtonX(MOUSE_X - slider_button_width / 2);
-		setSliderWidth(MOUSE_X - x);
+		this->slider_button_x = (MOUSE_X - slider_button_width / 2);
+		this->slider_width = (MOUSE_X - x);
 	}
     calculateTextPosition();
     setfillcolor(color);
@@ -289,184 +225,10 @@ bool Slider::boolIsMouseOn()
 	}
 }
 
-//实现读取滑动条值函数
-double Slider::loadValue()
-{
-    return atof(slider_value_text.c_str());;
-}
-
 //实现读取滑动条值字符串函数
 string Slider::loadValueStr()
 {
 	return slider_value_text;
-}
-
-// 实现滑动条类的设置滑块X坐标函数
-void Slider::setSliderX(int slider_x)
-{
-    this->slider_x = slider_x;
-}
-
-// 实现滑动条类的设置滑块Y坐标函数
-void Slider::setSliderY(int slider_y)
-{
-    this->slider_y = slider_y;
-}
-
-// 实现滑动条类的设置滑块宽度函数
-void Slider::setSliderWidth(int slider_width)
-{
-    this->slider_width = slider_width;
-}
-
-// 实现滑动条类的设置滑块高度函数
-void Slider::setSliderHeight(int slider_height)
-{
-    this->slider_height = slider_height;
-}
-
-// 实现滑动条类的设置X坐标函数
-void Slider::setX(int x)
-{
-    this->x = x;
-}
-
-// 实现滑动条类的设置Y坐标函数
-void Slider::setY(int y)
-{
-    this->y = y;
-}
-
-// 实现滑动条类的设置宽度函数
-void Slider::setWidth(int width)
-{
-    this->width = width;
-}
-
-// 实现滑动条类的设置高度函数
-void Slider::setHeight(int height)
-{
-    this->height = height;
-}
-
-// 实现滑动条类的设置滑块按钮X坐标函数
-void Slider::setSliderButtonX(int slider_button_x)
-{
-	this->slider_button_x = slider_button_x;
-}
-
-// 实现滑动条类的设置滑块按钮Y坐标函数
-void Slider::setSliderButtonY(int slider_button_y)
-{
-	this->slider_button_y = slider_button_y;
-}
-
-// 实现滑动条类的设置滑块按钮宽度函数
-void Slider::setSliderButtonWidth(int slider_button_width)
-{
-	this->slider_button_width = slider_button_width;
-}
-
-// 实现滑动条类的设置滑块按钮高度函数
-void Slider::setSliderButtonHeight(int slider_button_height)
-{
-	this->slider_button_height = slider_button_height;
-}
-
-// 实现滑动条类的设置颜色函数
-void Slider::setColor(int color)
-{
-    this->color = color;
-}
-
-// 实现滑动条类的设置滑块颜色函数
-void Slider::setSliderColor(int slider_color)
-{
-    this->slider_color = slider_color;
-}
-
-// 实现滑动条类的设置滑块按钮颜色函数
-void Slider::setSliderButtonColor(int slider_button_color)
-{
-	this->slider_button_color = slider_button_color;
-}
-
-// 实现滑动条类的设置文本颜色函数
-void Slider::setTextColor(int text_color)
-{
-	this->text_color = text_color;
-}
-
-//实现滑动条类的设置滑动条标题函数
-void Slider::setSliderTitle(string slider_title)
-{
-	this->slider_title = slider_title;
-}
-
-//实现滑动条类的设置滑动条左侧文本函数
-void Slider::setSliderLeftText(string slider_left_text)
-{
-	this->slider_left_text = slider_left_text;
-}
-
-//实现滑动条类的设置滑动条右侧文本函数
-void Slider::setSliderRightText(string slider_right_text)
-{
-	this->slider_right_text = slider_right_text;
-}
-
-//实现滑动条类的设置滑动条值文本函数
-void Slider::setSliderValueText(string slider_value_text)
-{
-	this->slider_value_text = slider_value_text;
-}
-
-//实现滑动条类的设置滑动条标题X坐标函数
-void Slider::setSliderTitleX(int slider_title_x)
-{
-	this->slider_title_x = slider_title_x;
-}
-
-//实现滑动条类的设置滑动条左侧文本X坐标函数
-void Slider::setSliderLeftTextX(int slider_left_text_x)
-{
-	this->slider_left_text_x = slider_left_text_x;
-}
-
-//实现滑动条类的设置滑动条右侧文本X坐标函数
-void Slider::setSliderRightTextX(int slider_right_text_x)
-{
-	this->slider_right_text_x = slider_right_text_x;
-}
-
-//实现滑动条类的设置滑动条值文本X坐标函数
-void Slider::setSliderValueTextX(int slider_value_text_x)
-{
-	this->slider_value_text_x = slider_value_text_x;
-}
-
-//实现滑动条类的设置滑动条标题Y坐标函数
-void Slider::setSliderTitleY(int slider_title_y)
-{
-	this->slider_title_y = slider_title_y;
-}
-
-//实现滑动条类的设置滑动条左侧文本Y坐标函数
-void Slider::setSliderLeftTextY(int slider_left_text_y)
-{
-	this->slider_left_text_y = slider_left_text_y;
-}
-
-//实现滑动条类的设置滑动条右侧文本Y坐标函数
-void Slider::setSliderRightTextY(int slider_right_text_y)
-{
-	this->slider_right_text_y = slider_right_text_y;
-}
-
-//实现滑动条类的设置滑动条值文本Y坐标函数
-void Slider::setSliderValueTextY(int slider_value_text_y)
-{
-	this->slider_value_text_y = slider_value_text_y;
 }
 
 //实现滑动条类计算文本坐标函数
@@ -476,7 +238,7 @@ void Slider::calculateTextPosition()
 	double slider_right_text_double = atof(slider_right_text.c_str());
 	double slider_value_text_double = atof(slider_value_text.c_str());
 	slider_value_text_double = slider_left_text_double + (slider_right_text_double - slider_left_text_double) * slider_width / width;
-	setSliderValueText(to_string(slider_value_text_double));
-	setSliderValueTextX(slider_button_x - text_size * slider_value_text.length() / 4);
-	setSliderValueTextY(y + 3 * height / 2);
+	this->slider_value_text = (to_string(slider_value_text_double));
+	this-> slider_value_text_x = (slider_button_x - text_size * slider_value_text.length() / 4);
+	this-> slider_value_text_y = (y + 3 * height / 2);
 }

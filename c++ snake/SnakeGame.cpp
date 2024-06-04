@@ -36,7 +36,7 @@ MapSnakeGame::MapSnakeGame(int width, int height, int blocksize) : SnakeGame(wid
 void SnakeGame::setAll(int width, int height, int blocksize)
 {
 	//设置游戏参数
-	if (width * blocksize > MAX_WIDTH || height * blocksize > MAX_HEIGHT)
+	if (width * blocksize > 0.8 * WINDOW_WIDTH || height * blocksize > 0.9 * WINDOW_HEIGHT)
 	{
 		this->blocksize = MINBLOCKSIZE;
 	}
@@ -44,17 +44,17 @@ void SnakeGame::setAll(int width, int height, int blocksize)
 	{
 		this->blocksize = max(blocksize, MINBLOCKSIZE);
 	}
-	if (width * blocksize > MAX_WIDTH)
+	if (width * MINBLOCKSIZE > 0.8 * WINDOW_WIDTH)
 	{
-		this->width = max(min(MAX_WIDTH / MINBLOCKSIZE, width),MINWIDTH);
+		this->width = (0.8 * WINDOW_WIDTH / MINBLOCKSIZE);
 	}
 	else
 	{
 		this->width = max(width, MINWIDTH);
 	}
-	if (height * blocksize > MAX_HEIGHT)
+	if (height * MINBLOCKSIZE > 0.9 * WINDOW_HEIGHT)
 	{
-		this->height = max(min(MAX_HEIGHT / MINBLOCKSIZE, width),MINWIDTH);
+		this->height = (0.9 * WINDOW_HEIGHT / MINBLOCKSIZE);
 	}
 	else
 	{
@@ -66,8 +66,7 @@ void SnakeGame::setAll(int width, int height, int blocksize)
 	direction = 0;
 	is_specialfood_eff = false;
 	Useabletimes = 0;
-	snake.clear();
-	snake.push_back({ width / 2, height / 2 });
+	initialsnake();
 	food = { -1,-1 };
 	specialfood = { -1,-1 };
 	isGameOver = false;
@@ -76,6 +75,13 @@ void SnakeGame::setAll(int width, int height, int blocksize)
 	difficulty = stod(difficultystr);
 	placefood();
 	placespecialfood();
+}
+
+void SnakeGame::initialsnake()
+{
+	//初始化蛇，蛇头在地图中心，蛇身在蛇头左侧
+	snake.clear();
+	snake.push_back({ width / 2, height / 2 });
 }
 
 void SnakeGame::drawmap()
