@@ -61,10 +61,6 @@ void page0(int& value)
 	Sleep(100);
 	BeginBatchDraw();
 	cleardevice();
-	playbutton.setIsUseable(true);
-	editbutton.setIsUseable(true);
-	settingbutton.setIsUseable(true);
-	quitbutton.setIsUseable(true);
 	playbutton.draw();
 	editbutton.draw();
 	settingbutton.draw();
@@ -94,10 +90,6 @@ void page0(int& value)
 			exit(0);
 		}
 	}
-	playbutton.setIsUseable(false);
-	editbutton.setIsUseable(false);
-	settingbutton.setIsUseable(false);
-	quitbutton.setIsUseable(false);
 	closegraph();
 	return pages(value);
 
@@ -108,11 +100,6 @@ void page1(int& value)
 	Sleep(100);
 	BeginBatchDraw();
 	cleardevice();
-	defaultbutton.setIsUseable(true);
-	mapbutton.setIsUseable(true);
-	randombutton.setIsUseable(true);
-	gravitybutton.setIsUseable(true);
-	backbutton.setIsUseable(true);
 	defaultbutton.draw();
 	mapbutton.draw();
 	randombutton.draw();
@@ -149,11 +136,6 @@ void page1(int& value)
 			break;
 		}
 	}
-	defaultbutton.setIsUseable(false);
-	mapbutton.setIsUseable(false);
-	randombutton.setIsUseable(false);
-	gravitybutton.setIsUseable(false);
-	backbutton.setIsUseable(false);
 	closegraph();
 	return pages(value);
 }
@@ -161,8 +143,6 @@ void page1(int& value)
 void page2(int& value)
 {
 	Sleep(100);
-	backbutton.setIsUseable(true);
-	savebutton.setIsUseable(true);
 	backbutton.setAll(0, WINDOW_HEIGHT - buttongap1 / 2, buttonwidth / 4, buttongap1 / 2, "Back", WHITE, BLACK, buttongap1 / 4);
 	char widthstr[5];
 	char heightstr[5];
@@ -201,8 +181,6 @@ void page2(int& value)
 		}
 		Sleep(70);
 	}
-	backbutton.setIsUseable(false);
-	savebutton.setIsUseable(false);
 	closegraph();
 	return pages(value);
 }
@@ -214,11 +192,6 @@ void page3(int& value)
 	char windowwidthstr[5];
 	char windowheightstr[5];
 	Sleep(100);
-	savebutton.setIsUseable(true);
-	backbutton.setIsUseable(true);
-	setwindowsizebutton.setIsUseable(true);
-	speedslider.setIsUseable(true);
-	difficultyslider.setIsUseable(true);
 	backbutton.setAll(0, WINDOW_HEIGHT - buttongap1 / 2, buttonwidth / 4, buttongap1 / 2, "Back", WHITE, BLACK, buttongap1 / 4);
 	while (true)
 	{
@@ -251,11 +224,6 @@ void page3(int& value)
 		}
 		Sleep(10);
 	}
-	savebutton.setIsUseable(false);
-	backbutton.setIsUseable(false);
-	setwindowsizebutton.setIsUseable(false);
-	speedslider.setIsUseable(false);
-	difficultyslider.setIsUseable(false);
 	closegraph();
 	return pages(value);
 }

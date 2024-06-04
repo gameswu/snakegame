@@ -56,7 +56,6 @@ Button::Button(int x, int y, int width, int height, string text, int color, int 
     this->text_size = text_size;
     this->text_x = x + width / 2 - text_size * text.length() / 4;
     this->text_y = y + height / 2 - text_size / 2;
-	this->isUseable = false;
 }
 
 void Button::setAll(int x, int y, int width, int height, string text, int color, int text_color, int text_size)
@@ -174,11 +173,6 @@ void Button::setTextY(int text_y)
     this->text_y = text_y;
 }
 
-void Button::setIsUseable(bool isUseable)
-{
-	this->isUseable = isUseable;
-}
-
 // 实现滑动条类的构造函数
 Slider::Slider(int x, int y, int width, int height, int color, int slider_color, int slider_button_color, int text_color, string slider_title, string slider_left_text, string slider_right_text)
 {
@@ -211,7 +205,6 @@ Slider::Slider(int x, int y, int width, int height, int color, int slider_color,
 	this->slider_right_text_y = y;
 	this->slider_value_text_x = slider_button_x - text_size * slider_value_text.length() / 4;
 	this->slider_value_text_y = y + 3 * height / 2;
-	this->isUseable = false;
 }
 
 void Slider::setAll(int x, int y, int width, int height, int color, int slider_color, int slider_button_color, int text_color, string slider_title, string slider_left_text, string slider_right_text, string slider_value_text)
@@ -245,14 +238,7 @@ void Slider::setAll(int x, int y, int width, int height, int color, int slider_c
 	this->slider_right_text_y = y;
 	this->slider_value_text_x = slider_button_x - text_size * slider_value_text.length() / 4;
 	this->slider_value_text_y = y + 3 * height / 2;
-	this->isUseable = false;
 }
-
-void Slider::setIsUseable(bool isUseable)
-{
-	this->isUseable = isUseable;
-}
-
 // 实现滑动条类的绘制函数
 void Slider::draw()
 {

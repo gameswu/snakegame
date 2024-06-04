@@ -37,7 +37,6 @@ private:
 	int text_color;
 	int text_size;
 	int text_x, text_y;
-	bool isUseable = false;
 public:
 	Button(int x, int y, int width, int height, string text, int color, int text_color, int text_size); 
 	void draw();
@@ -53,7 +52,6 @@ public:
 	void setColor(int color);
 	void setTextX(int text_x);
 	void setTextY(int text_y);
-	void setIsUseable(bool is_useable);
 	void setAll(int x, int y, int width, int height, string text, int color, int text_color, int text_size);
 };
 
@@ -83,7 +81,6 @@ private:
 	int slider_right_text_y;
 	int slider_value_text_x;
 	int slider_value_text_y;
-	bool isUseable = false;
 	string slider_title;
 	string slider_left_text;
 	string slider_right_text;
@@ -125,7 +122,6 @@ public:
 	void setSliderValueTextY(int slider_value_text_y);
 	void calculateTextPosition();
 	void setAll(int x, int y, int width, int height, int color, int slider_color, int slider_button_color, int text_color, string slider_title, string slider_left_text, string slider_right_text, string slider_value_text);
-	void setIsUseable(bool is_useable);
 };
 
 #endif UI_H
