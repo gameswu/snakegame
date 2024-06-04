@@ -98,6 +98,9 @@ void page0(int& value)
 	editbutton.setIsUseable(false);
 	settingbutton.setIsUseable(false);
 	quitbutton.setIsUseable(false);
+	closegraph();
+	return pages(value);
+
 }
 
 void page1(int& value)
@@ -151,6 +154,8 @@ void page1(int& value)
 	randombutton.setIsUseable(false);
 	gravitybutton.setIsUseable(false);
 	backbutton.setIsUseable(false);
+	closegraph();
+	return pages(value);
 }
 
 void page2(int& value)
@@ -198,6 +203,8 @@ void page2(int& value)
 	}
 	backbutton.setIsUseable(false);
 	savebutton.setIsUseable(false);
+	closegraph();
+	return pages(value);
 }
 
 void page3(int& value)
@@ -249,6 +256,8 @@ void page3(int& value)
 	setwindowsizebutton.setIsUseable(false);
 	speedslider.setIsUseable(false);
 	difficultyslider.setIsUseable(false);
+	closegraph();
+	return pages(value);
 }
 
 void page4(int& value)
@@ -286,6 +295,7 @@ void page4(int& value)
 		Sleep(100 / defaultsg.speed);
 		EndBatchDraw();
 	}
+	closegraph();
 	return pages(value);
 }
 
@@ -315,6 +325,8 @@ void page5(int& value)
 		Sleep(100 / mapsg.speed);
 		EndBatchDraw();
 	}
+	closegraph();
+	return pages(value);
 }
 
 void page6(int& value)
@@ -354,6 +366,7 @@ void page6(int& value)
 		Sleep(100 / randomsg.speed);
 		EndBatchDraw();
 	}
+	closegraph();
 	return pages(value);
 }
 
@@ -396,5 +409,6 @@ void page7(int& value)
 		Sleep(100 / gravitysg.speed);
 		EndBatchDraw();
 	}
+	closegraph();
 	return pages(value);
 }

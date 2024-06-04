@@ -323,6 +323,7 @@ void SnakeGame::afterEatfood()
 	}
 	if (is_specialfood_eff && chrono::duration_cast<chrono::seconds>(chrono::system_clock::now() - LastsfoodPlaceTime) > sfoodLifeTime)
 	{
+		lastscore = score;
 		is_specialfood_eff = false;
 		specialfood = { -1,-1 };
 	}
