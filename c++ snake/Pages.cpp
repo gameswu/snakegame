@@ -5,54 +5,32 @@ void pages(int& pagenum)
 	loadsettings(speedstr, difficultystr, WINDOW_WIDTH, WINDOW_HEIGHT);
 	setWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	initialButtons();
-	int val;
-	if (pagenum == 0)
+	switch (pagenum)
 	{
-		page0(val);
-		pagenum = val;
-		return pages(pagenum);
-	}
-	if (pagenum == 1)
-	{
-		page1(val);
-		pagenum = val;
-		return pages(pagenum);
-	}
-	if (pagenum == 2)
-	{
-		page2(val);
-		pagenum = val;
-		return pages(pagenum);
-	}
-	if (pagenum == 3)
-	{
-		page3(val);
-		pagenum = val;
-		return pages(pagenum);
-	}
-	if (pagenum == 4)
-	{
-		page4(val);
-		pagenum = val;
-		return pages(pagenum);
-	}
-	if (pagenum == 5)
-	{
-		page5(val);
-		pagenum = val;
-		return pages(pagenum);
-	}
-	if (pagenum == 6)
-	{
-		page6(val);
-		pagenum = val;
-		return pages(pagenum);
-	}
-	if (pagenum == 7)
-	{
-		page7(val);
-		pagenum = val;
-		return pages(pagenum);
+	case 0:
+		page0(pagenum);
+		break;
+	case 1:
+		page1(pagenum);
+		break;
+	case 2:
+		page2(pagenum);
+		break;
+	case 3:
+		page3(pagenum);
+		break;
+	case 4:
+		page4(pagenum);
+		break;
+	case 5:
+		page5(pagenum);
+		break;
+	case 6:
+		page6(pagenum);
+		break;
+	case 7:
+		page7(pagenum);
+		break;
 	}
 }
 
@@ -67,7 +45,7 @@ void page0(int& value)
 	quitbutton.draw();
 	EndBatchDraw();
 	Sleep(100);
-	while (1)
+	while (true)
 	{
 		getMousePosition();
 		if (playbutton.isClicked())
@@ -91,8 +69,8 @@ void page0(int& value)
 		}
 	}
 	closegraph();
+	Sleep(100);
 	return pages(value);
-
 }
 
 void page1(int& value)
@@ -137,6 +115,7 @@ void page1(int& value)
 		}
 	}
 	closegraph();
+	Sleep(100);
 	return pages(value);
 }
 
@@ -182,6 +161,7 @@ void page2(int& value)
 		Sleep(70);
 	}
 	closegraph();
+	Sleep(100);
 	return pages(value);
 }
 
@@ -225,6 +205,7 @@ void page3(int& value)
 		Sleep(10);
 	}
 	closegraph();
+	Sleep(100);
 	return pages(value);
 }
 
@@ -264,6 +245,7 @@ void page4(int& value)
 		EndBatchDraw();
 	}
 	closegraph();
+	Sleep(100);
 	return pages(value);
 }
 
@@ -294,6 +276,7 @@ void page5(int& value)
 		EndBatchDraw();
 	}
 	closegraph();
+	Sleep(100);
 	return pages(value);
 }
 
@@ -335,6 +318,7 @@ void page6(int& value)
 		EndBatchDraw();
 	}
 	closegraph();
+	Sleep(100);
 	return pages(value);
 }
 
@@ -378,5 +362,6 @@ void page7(int& value)
 		EndBatchDraw();
 	}
 	closegraph();
+	Sleep(100);
 	return pages(value);
 }
