@@ -193,7 +193,6 @@ void page3(int& value)
 
 void page4(int& value)
 {
-	//”√inputbox ‰»ÎµÿÕº≥ﬂ¥Áwidth,height
 	char widthstr[5];
 	char heightstr[5];
 	char blocksize[5];
@@ -204,6 +203,25 @@ void page4(int& value)
 	width = atoi(widthstr);
 	height = atoi(heightstr);
 	blocksizeint = atoi(blocksize);
-	value = 1;
+	defaultsg.setAll(width, height, blocksizeint);
+	while (true)
+	{
+		BeginBatchDraw();
+		cleardevice();
+		defaultsg.snakemove();
+		defaultsg.drawmap();
+		defaultsg.drawother();
+		defaultsg.afterEatfood();
+		defaultsg.placespecialfood();
+		defaultsg.gameover();
+		if (defaultsg.isGameOver)
+		{
+			MessageBox(GetHWnd(), "Game Over", "Game Over", MB_OK);
+			value = 1;
+			break;
+		}
+		Sleep(100 / defaultsg.speed);
+		EndBatchDraw();
+	}
 	return pages(value);
 }
