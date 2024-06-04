@@ -51,6 +51,8 @@ public:;
 	  void gameover();
 	  void afterEatfood();
 	  void setAll(int width, int height, int blocksize, double speed, double difficulty);
+	  void savescore(string mark);
+	  void loadscore(string mark);
 };
 
 class RandomSnakeGame : public SnakeGame
@@ -72,8 +74,27 @@ public:
 	void obstaclemove();
 };
 
+class EditSnakeGame : public SnakeGame
+{
+public:
+	EditSnakeGame(int width, int height, int blocksize);
+	void setonlymap();
+	void placeobstacle();
+	void drawobstacle();
+	void savemap(string filename);
+};
+
+class MapSnakeGame : public SnakeGame
+{
+public:
+	MapSnakeGame(int width, int height, int blocksize);
+	void loadmap(string filename);
+};
+
 extern SnakeGame defaultsg;
 extern RandomSnakeGame randomsg;
 extern GravitySnakeGame gravitysg;
+extern EditSnakeGame editsg;
+extern MapSnakeGame mapsg;
 
 #endif SNAKEGAME_H

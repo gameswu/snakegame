@@ -61,7 +61,6 @@ void page0(int& value)
 	Sleep(100);
 	BeginBatchDraw();
 	cleardevice();
-	value = -1;
 	playbutton.setIsUseable(true);
 	editbutton.setIsUseable(true);
 	settingbutton.setIsUseable(true);
@@ -106,7 +105,6 @@ void page1(int& value)
 	Sleep(100);
 	BeginBatchDraw();
 	cleardevice();
-	value = -1;
 	defaultbutton.setIsUseable(true);
 	mapbutton.setIsUseable(true);
 	randombutton.setIsUseable(true);
@@ -129,6 +127,7 @@ void page1(int& value)
 		}
 		if (mapbutton.isClicked())
 		{
+			value = 5;
 			break;
 		}
 		if (randombutton.isClicked())
@@ -156,7 +155,49 @@ void page1(int& value)
 
 void page2(int& value)
 {
-	
+	Sleep(100);
+	backbutton.setIsUseable(true);
+	savebutton.setIsUseable(true);
+	backbutton.setAll(0, WINDOW_HEIGHT - buttongap1 / 2, buttonwidth / 4, buttongap1 / 2, "Back", WHITE, BLACK, buttongap1 / 4);
+	char widthstr[5];
+	char heightstr[5];
+	int width, height, blocksizeint;
+	InputBox(widthstr, 5, "Input the map width");
+	InputBox(heightstr, 5, "Input the map height");
+	width = atoi(widthstr);
+	height = atoi(heightstr);
+	blocksizeint = 20;
+	editsg.setAll(width, height, blocksizeint, 1, 1);
+	editsg.setonlymap();
+	while (true)
+	{
+		getMousePosition();
+		BeginBatchDraw();
+		cleardevice();
+		backbutton.draw();
+		savebutton.draw();
+		editsg.drawmap();
+		editsg.placeobstacle();
+		editsg.drawobstacle();
+		EndBatchDraw();
+		if (savebutton.isClicked())
+		{
+			value = 0;
+			char filename[20];
+			InputBox(filename, 20, "Input the file name");
+			editsg.savemap(filename);
+			break;
+		}
+		if (backbutton.isClicked())
+		{
+			value = 0;
+			MessageBox(GetHWnd(), "The map will not be saved", "Edit", MB_OK);
+			break;
+		}
+		Sleep(70);
+	}
+	backbutton.setIsUseable(false);
+	savebutton.setIsUseable(false);
 }
 
 void page3(int& value)
@@ -166,7 +207,6 @@ void page3(int& value)
 	char windowwidthstr[5];
 	char windowheightstr[5];
 	Sleep(100);
-	value = -1;
 	savebutton.setIsUseable(true);
 	backbutton.setIsUseable(true);
 	setwindowsizebutton.setIsUseable(true);
@@ -225,6 +265,7 @@ void page4(int& value)
 	height = atoi(heightstr);
 	blocksizeint = atoi(blocksize);
 	defaultsg.setAll(width, height, blocksizeint, 1, 1);
+	defaultsg.loadscore("D");
 	while (true)
 	{
 		BeginBatchDraw();
@@ -237,8 +278,9 @@ void page4(int& value)
 		defaultsg.gameover();
 		if (defaultsg.isGameOver)
 		{
-			MessageBox(GetHWnd(), "Game Over", "Default", MB_OK);
 			value = 1;
+			defaultsg.savescore("D");
+			MessageBox(GetHWnd(), "Game Over", "Default", MB_OK);
 			break;
 		}
 		Sleep(100 / defaultsg.speed);
@@ -249,7 +291,30 @@ void page4(int& value)
 
 void page5(int& value)
 {
-
+	Sleep(100);
+	char filename[20];
+	InputBox(filename, 20, "Input the file name");
+	mapsg.loadmap(filename);
+	while (true)
+	{
+		BeginBatchDraw();
+		cleardevice();
+		mapsg.snakemove();
+		mapsg.drawmap();
+		mapsg.drawother();
+		mapsg.afterEatfood();
+		mapsg.placespecialfood();
+		mapsg.gameover();
+		if (mapsg.isGameOver)
+		{
+			value = 1;
+			mapsg.savescore(filename);
+			MessageBox(GetHWnd(), "Game Over", "Map", MB_OK);
+			break;
+		}
+		Sleep(100 / mapsg.speed);
+		EndBatchDraw();
+	}
 }
 
 void page6(int& value)
@@ -266,7 +331,9 @@ void page6(int& value)
 	height = atoi(heightstr);
 	blocksizeint = atoi(blocksize);
 	randomsg.setAll(width, height, blocksizeint, 1, 1);
+	randomsg.loadscore("R");
 	randomsg.placeobstacle();
+	randomsg.placefood();
 	while (true)
 	{
 		BeginBatchDraw();
@@ -279,8 +346,9 @@ void page6(int& value)
 		randomsg.gameover();
 		if (randomsg.isGameOver)
 		{
-			MessageBox(GetHWnd(), "Game Over", "Random", MB_OK);
 			value = 1;
+			randomsg.savescore("R");
+			MessageBox(GetHWnd(), "Game Over", "Random", MB_OK);
 			break;
 		}
 		Sleep(100 / randomsg.speed);
@@ -303,8 +371,10 @@ void page7(int& value)
 	height = atoi(heightstr);
 	blocksizeint = atoi(blocksize);
 	gravitysg.setAll(width, height, blocksizeint, 1, 1);
+	gravitysg.loadscore("G");
 	gravitysg.setmovetime();
 	gravitysg.placeobstacle();
+	gravitysg.placefood();
 	while (true)
 	{
 		BeginBatchDraw();
@@ -318,8 +388,9 @@ void page7(int& value)
 		gravitysg.gameover();
 		if (gravitysg.isGameOver)
 		{
-			MessageBox(GetHWnd(), "Game Over", "Gravity", MB_OK);
 			value = 1;
+			gravitysg.savescore("G");
+			MessageBox(GetHWnd(), "Game Over", "Gravity", MB_OK);
 			break;
 		}
 		Sleep(100 / gravitysg.speed);

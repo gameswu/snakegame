@@ -15,6 +15,14 @@ void initialfiles()
 	{
 		savesettings("1", "1", 800, 600);
 	}
+	if (!filesystem::exists("snake/scores"))
+	{
+		filesystem::create_directory("snake/scores");
+	}
+	if (!filesystem::exists("snake/maps"))
+	{
+		filesystem::create_directory("snake/maps");
+	}
 }
 
 void savesettings(string speed, string difficulty, int windowwidth, int windowheight)
