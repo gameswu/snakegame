@@ -214,6 +214,37 @@ void SnakeGame::playerinput()
 			break;
 		}
 	}
+	else
+	{
+		if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
+			if (direction != 1)
+			{
+				direction = 3;
+				Useabletimes++;
+			}
+		}
+		if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
+			if (direction != 3)
+			{
+				direction = 1;
+				Useabletimes++;
+			}
+		}
+		if (GetAsyncKeyState(VK_UP) & 0x8000) {
+			if (direction != 2)
+			{
+				direction = 0;
+				Useabletimes++;
+			}
+		}
+		if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
+			if (direction != 0)
+			{
+				direction = 2;
+				Useabletimes++;
+			}
+		}
+	}
 }
 
 bool SnakeGame::isFood(Position pos)
