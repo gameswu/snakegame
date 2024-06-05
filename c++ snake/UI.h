@@ -54,8 +54,6 @@ private:
     int slider_color;
 	int slider_button_color;
 	int text_color;
-    int slider_x;
-    int slider_y;
     int slider_width;
     int slider_height;
     int slider_button_x;

@@ -120,8 +120,6 @@ Slider::Slider(int x, int y, int width, int height, int color, int slider_color,
     this->slider_color = slider_color;
 	this->slider_button_color = slider_button_color;
 	this->text_color = text_color;
-    this->slider_x = x;
-    this->slider_y = y;
     this->slider_width = width / 2;
     this->slider_height = height;
 	this->slider_button_x = x + slider_width - width / 20;
@@ -153,8 +151,6 @@ void Slider::setAll(int x, int y, int width, int height, int color, int slider_c
 	this->slider_color = slider_color;
 	this->slider_button_color = slider_button_color;
 	this->text_color = text_color;
-	this->slider_x = x;
-	this->slider_y = y;
 	this->slider_width = width * (stod(slider_value_text) - stod(slider_left_text)) / (stod(slider_right_text) - stod(slider_left_text));
 	this->slider_height = height;
 	this->slider_button_x = x + slider_width - width / 20;
@@ -187,7 +183,7 @@ void Slider::draw()
     setfillcolor(color);
     fillrectangle(x, y, x + width, y + height);
     setfillcolor(slider_color);
-    fillrectangle(slider_x, slider_y, slider_x + slider_width, slider_y + slider_height);
+    fillrectangle(x, y, x + slider_width, y + slider_height);
     setfillcolor(slider_button_color);
     fillrectangle(slider_button_x, slider_button_y, slider_button_x + slider_button_width, slider_button_y + slider_button_height);
     setbkmode(TRANSPARENT);
