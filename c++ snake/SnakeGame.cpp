@@ -193,6 +193,7 @@ void SnakeGame::playerinput()
 			}
 		}
 	}
+	Sleep(20);
 }
 
 bool SnakeGame::isFood(Position pos)
