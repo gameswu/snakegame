@@ -294,8 +294,6 @@ void SnakeGame::afterEatfood()
 	if (isFood(snake[0]))
 	{
 		score++;
-		snake.push_back(snake[snake.size() - 1]);
-		snake.pop_back();
 		placefood();
 	}
 	//吃到特殊食物，分数增加，食物重置
