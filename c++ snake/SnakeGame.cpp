@@ -275,7 +275,7 @@ void SnakeGame::placespecialfood()
 void SnakeGame::gameover()
 {
 	//游戏结束，蛇头碰到蛇身,障碍物
-	if (isSnakeBody(snake[0]) || isObstacle(snake[0]))
+	if (isSnakeBody(snake[0]) || isObstacle(snake[0]) || snake.size() == width * height)
 	{
 		if (Useabletimes > 0) 
 		{
