@@ -465,6 +465,7 @@ void MapSnakeGame::loadmap(string filename)
 	if (!file.is_open())
 	{
 		MessageBox(GetHWnd(), "File not found", "Error", MB_OK);
+		setAll(12, 12, 20);
 		return;
 	}
 	file >> width;
