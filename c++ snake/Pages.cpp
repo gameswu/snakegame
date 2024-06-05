@@ -8,28 +8,28 @@ void pages(int& pagenum)
 	switch (pagenum)
 	{
 	case 0:
-		page0(pagenum);
+		return page0(pagenum);
 		break;
 	case 1:
-		page1(pagenum);
+		return page1(pagenum);
 		break;
 	case 2:
-		page2(pagenum);
+		return page2(pagenum);
 		break;
 	case 3:
-		page3(pagenum);
+		return page3(pagenum);
 		break;
 	case 4:
-		page4(pagenum);
+		return page4(pagenum);
 		break;
 	case 5:
-		page5(pagenum);
+		return page5(pagenum);
 		break;
 	case 6:
-		page6(pagenum);
+		return page6(pagenum);
 		break;
 	case 7:
-		page7(pagenum);
+		return page7(pagenum);
 		break;
 	}
 }
@@ -50,16 +50,22 @@ void page0(int& value)
 		getMousePosition();
 		if (playbutton.isClicked())
 		{
+			Sleep(100);
+			getMousePosition();
 			value = 1;
 			break;
 		}
 		if (editbutton.isClicked())
 		{
+			Sleep(100);
+			getMousePosition();
 			value = 2;
 			break;
 		}
 		if (settingbutton.isClicked())
 		{
+			Sleep(100);
+			getMousePosition();
 			value = 3;
 			break;
 		}
@@ -90,32 +96,41 @@ void page1(int& value)
 		getMousePosition();
 		if (defaultbutton.isClicked())
 		{
+			Sleep(100);
+			getMousePosition();
 			value = 4;
 			break;
 		}
 		if (mapbutton.isClicked())
 		{
+			Sleep(100);
+			getMousePosition();
 			value = 5;
 			break;
 		}
 		if (randombutton.isClicked())
 		{
+			Sleep(100);
+			getMousePosition();
 			value = 6;
 			break;
 		}
 		if (gravitybutton.isClicked())
 		{
+			Sleep(100);
+			getMousePosition();
 			value = 7;
 			break;
 		}
 		if (backbutton.isClicked())
 		{
+			Sleep(100);
+			getMousePosition();
 			value = 0;
 			break;
 		}
 	}
 	closegraph();
-	Sleep(100);
 	return pages(value);
 }
 
@@ -161,7 +176,6 @@ void page2(int& value)
 		Sleep(70);
 	}
 	closegraph();
-	Sleep(100);
 	return pages(value);
 }
 
@@ -186,17 +200,23 @@ void page3(int& value)
 		EndBatchDraw();
 		if (savebutton.isClicked())
 		{
+			Sleep(100);
+			getMousePosition();
 			savesettings(speedslider.loadValueStr(), difficultyslider.loadValueStr(), windowwidth, windowheight);
 			value = 0;
 			break;
 		}
 		if (backbutton.isClicked())
 		{
+			Sleep(100);
+			getMousePosition();
 			value = 0;
 			break;
 		}
 		if (setwindowsizebutton.isClicked())
 		{
+			Sleep(100);
+			getMousePosition();
 			InputBox(windowwidthstr, 5, "Input the window width");
 			InputBox(windowheightstr, 5, "Input the window height");
 			windowwidth = min(max(atoi(windowwidthstr), MIN_WIDTH), MAX_WIDTH);
@@ -205,7 +225,6 @@ void page3(int& value)
 		Sleep(10);
 	}
 	closegraph();
-	Sleep(100);
 	return pages(value);
 }
 
@@ -245,7 +264,6 @@ void page4(int& value)
 		EndBatchDraw();
 	}
 	closegraph();
-	Sleep(100);
 	return pages(value);
 }
 
@@ -276,7 +294,6 @@ void page5(int& value)
 		EndBatchDraw();
 	}
 	closegraph();
-	Sleep(100);
 	return pages(value);
 }
 
@@ -318,7 +335,6 @@ void page6(int& value)
 		EndBatchDraw();
 	}
 	closegraph();
-	Sleep(100);
 	return pages(value);
 }
 
@@ -362,6 +378,5 @@ void page7(int& value)
 		EndBatchDraw();
 	}
 	closegraph();
-	Sleep(100);
 	return pages(value);
 }

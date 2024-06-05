@@ -35,12 +35,13 @@ void setMaxWindowSize()
 // 定义函数获取鼠标的位置
 void getMousePosition()
 {
-    while (MouseHit()) 
-    {
-        mouse = GetMouseMsg();
+	if (MouseHit())
+	{
+		mouse = GetMouseMsg();
 		MOUSE_X = mouse.x;
 		MOUSE_Y = mouse.y;
-    }
+		FlushMouseMsgBuffer();
+	}
 }
 
 // 实现按钮类的构造函数
