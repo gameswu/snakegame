@@ -38,6 +38,8 @@ void getMousePosition()
     while (MouseHit()) 
     {
         mouse = GetMouseMsg();
+		MOUSE_X = mouse.x;
+		MOUSE_Y = mouse.y;
     }
 }
 
@@ -200,7 +202,7 @@ void Slider::draw()
 // 实现滑动条类的鼠标点击判断函数
 bool Slider::isClicked()
 {
-    if (boolIsMouseOn() && mouse.uMsg == WM_LBUTTONDOWN)
+    if (boolIsMouseOn() && mouse.mkLButton)
     {
         return true;
     }
@@ -213,7 +215,7 @@ bool Slider::isClicked()
 //实现获取鼠标是否在滑动条上函数
 bool Slider::boolIsMouseOn()
 {
-	if (mouse.x >= x && mouse.x <= x + width && mouse.y >= y && mouse.y <= y + height)
+	if (MOUSE_X >= x && MOUSE_X <= x + width && MOUSE_Y >= y && MOUSE_Y <= y + height)
 	{
 		return true;
 	}

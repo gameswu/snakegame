@@ -518,3 +518,4 @@ void MapSnakeGame::loadmap(string filename)
 	placefood();
 	placespecialfood();
 }
+
