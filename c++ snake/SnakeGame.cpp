@@ -155,93 +155,41 @@ void SnakeGame::snakemove() {
 
 void SnakeGame::playerinput()
 {
-	//玩家输入，w上，d右，s下，a左
-	if (_kbhit())
-	{
-		char ch = _getch();
-		switch (ch)
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000 || GetAsyncKeyState(0x41) & 0x8000) {
+		if (direction != 1)
 		{
-		case 'w':
-		case 'W':
-			if (direction == 2)
-			{
-				break;
-			}
-			direction = 0;
-			Useabletimes++;
-			break;
-		case 'd':
-		case 'D':
-			if (direction == 3)
-			{
-				break;
-			}
-			direction = 1;
-			Useabletimes++;
-			break;
-		case 's':
-		case 'S':
-			if (direction == 0)
-			{
-				break;
-			}
-			direction = 2;
-			Useabletimes++;
-			break;
-		case 'a':
-		case 'A':
-			if (direction == 1)
-			{
-				break;
-			}
 			direction = 3;
 			Useabletimes++;
-			break;
-		case 'p':
-		case 'P':
-			MessageBox(NULL, _T("Press P again to continue"), _T("Pause"), MB_OK);
-			while (true)
-			{
-				if (_kbhit())
-				{
-					char ch = _getch();
-					if (ch == 'p' || ch == 'P')
-					{
-						break;
-					}
-				}
-			}
-			break;
 		}
 	}
-	else
-	{
-		if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
-			if (direction != 1)
-			{
-				direction = 3;
-				Useabletimes++;
-			}
+	if (GetAsyncKeyState(VK_RIGHT) & 0x8000 || GetAsyncKeyState(0x44) & 0x8000) {
+		if (direction != 3)
+		{
+			direction = 1;
+			Useabletimes++;
 		}
-		if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
-			if (direction != 3)
-			{
-				direction = 1;
-				Useabletimes++;
-			}
+	}
+	if (GetAsyncKeyState(VK_UP) & 0x8000 || GetAsyncKeyState(0x57) & 0x8000) {
+		if (direction != 2)
+		{
+			direction = 0;
+			Useabletimes++;
 		}
-		if (GetAsyncKeyState(VK_UP) & 0x8000) {
-			if (direction != 2)
-			{
-				direction = 0;
-				Useabletimes++;
-			}
+	}
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000 || GetAsyncKeyState(0x53) & 0x8000) {
+		if (direction != 0)
+		{
+			direction = 2;
+			Useabletimes++;
 		}
-		if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
-			if (direction != 0)
+	}
+	if (GetAsyncKeyState(0x50) & 0x8000 || GetAsyncKeyState(VK_SPACE) & 0x8000) {
+		MessageBox(NULL, _T("Press P or SPACE again to continue"), _T("Pause"), MB_OK);
+		while (true)
+		{
+			if (GetAsyncKeyState(0x50) & 0x8000 || GetAsyncKeyState(VK_SPACE) & 0x8000)
 			{
-				direction = 2;
-				Useabletimes++;
+				break;
 			}
 		}
 	}
