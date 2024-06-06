@@ -37,13 +37,14 @@ void pages(int& pagenum)
 void page0(int& value)
 {
 	Sleep(100);
+
 	BeginBatchDraw();
 	cleardevice();
 	playbutton.draw();
 	editbutton.draw();
 	settingbutton.draw();
 	quitbutton.draw();
-	EndBatchDraw();
+	EndBatchDraw(); //绘制界面
 	Sleep(100);
 	while (true)
 	{
@@ -73,7 +74,7 @@ void page0(int& value)
 		{
 			exit(0);
 		}
-	}
+	}//判断按钮是否被点击并执行相应操作
 	closegraph();
 	Sleep(100);
 	return pages(value);
@@ -82,6 +83,7 @@ void page0(int& value)
 void page1(int& value)
 {
 	Sleep(100);
+
 	BeginBatchDraw();
 	cleardevice();
 	defaultbutton.draw();
@@ -89,7 +91,7 @@ void page1(int& value)
 	randombutton.draw();
 	gravitybutton.draw();
 	backbutton.draw();
-	EndBatchDraw();
+	EndBatchDraw();  //绘制界面
 	Sleep(100);
 	while (true)
 	{
@@ -97,7 +99,7 @@ void page1(int& value)
 		if (defaultbutton.isClicked())
 		{
 			Sleep(100);
-			getMousePosition();
+			getMousePosition();  //延时后获取鼠标信息
 			value = 4;
 			break;
 		}
@@ -129,7 +131,7 @@ void page1(int& value)
 			value = 0;
 			break;
 		}
-	}
+	}  //判断按钮是否被点击并执行相应操作
 	closegraph();
 	return pages(value);
 }
@@ -138,6 +140,7 @@ void page2(int& value)
 {
 	Sleep(100);
 	backbutton.setAll(0, WINDOW_HEIGHT - buttongap1 / 2, buttonwidth / 4, buttongap1 / 2, "Back", WHITE, BLACK, buttongap1 / 4);
+
 	char widthstr[5];
 	char heightstr[5];
 	int width, height, blocksizeint;
@@ -145,12 +148,14 @@ void page2(int& value)
 	InputBox(heightstr, 5, "Input the map height");
 	width = atoi(widthstr);
 	height = atoi(heightstr);
-	blocksizeint = 20;
+	blocksizeint = 20;  //用户设置
+
 	editsg.setAll(width, height, blocksizeint);
 	editsg.setonlymap();
 	while (true)
 	{
 		getMousePosition();
+
 		BeginBatchDraw();
 		cleardevice();
 		backbutton.draw();
@@ -158,7 +163,8 @@ void page2(int& value)
 		editsg.drawmap();
 		editsg.placeobstacle();
 		editsg.drawobstacle();
-		EndBatchDraw();
+		EndBatchDraw();  //绘制界面
+
 		if (savebutton.isClicked())
 		{
 			value = 0;
@@ -174,7 +180,7 @@ void page2(int& value)
 			break;
 		}
 		Sleep(70);
-	}
+	}  //判断按钮是否被点击并执行相应操作
 	closegraph();
 	return pages(value);
 }
@@ -185,11 +191,13 @@ void page3(int& value)
 	int windowheight = WINDOW_HEIGHT;
 	char windowwidthstr[5];
 	char windowheightstr[5];
+
 	Sleep(100);
 	backbutton.setAll(0, WINDOW_HEIGHT - buttongap1 / 2, buttonwidth / 4, buttongap1 / 2, "Back", WHITE, BLACK, buttongap1 / 4);
 	while (true)
 	{
 		getMousePosition();
+
 		BeginBatchDraw();
 		cleardevice();
 		savebutton.draw();
@@ -197,7 +205,7 @@ void page3(int& value)
 		setwindowsizebutton.draw();
 		speedslider.draw();
 		difficultyslider.draw();
-		EndBatchDraw();
+		EndBatchDraw();  //绘制界面
 		if (savebutton.isClicked())
 		{
 			Sleep(100);
@@ -223,7 +231,7 @@ void page3(int& value)
 			windowheight = min(max(atoi(windowheightstr),MIN_HEIGHT),MAX_HEIGHT);
 		}
 		Sleep(10);
-	}
+	}  //判断按钮是否被点击并执行相应操作
 	closegraph();
 	return pages(value);
 }
@@ -231,6 +239,7 @@ void page3(int& value)
 void page4(int& value)
 {
 	Sleep(100);
+
 	char widthstr[5];
 	char heightstr[5];
 	char blocksize[5];
@@ -240,7 +249,8 @@ void page4(int& value)
     InputBox(blocksize, 5, "Input the block size");
 	width = atoi(widthstr);
 	height = atoi(heightstr);
-	blocksizeint = atoi(blocksize);
+	blocksizeint = atoi(blocksize);  //用户设置
+
 	defaultsg.setAll(width, height, blocksizeint);
 	defaultsg.loadscore("D");
 	while (true)
@@ -260,8 +270,8 @@ void page4(int& value)
 			MessageBox(GetHWnd(), "Game Over", "Default", MB_OK);
 			break;
 		}
-		Sleep(100 / defaultsg.speed);
-		EndBatchDraw();
+		Sleep(100 / defaultsg.speed); //速度
+		EndBatchDraw(); //绘制界面
 	}
 	closegraph();
 	return pages(value);
@@ -270,9 +280,10 @@ void page4(int& value)
 void page5(int& value)
 {
 	Sleep(100);
+
 	char filename[20];
 	InputBox(filename, 20, "Input the file name");
-	mapsg.loadmap(filename);
+	mapsg.loadmap(filename);  //用户设置
 	while (true)
 	{
 		BeginBatchDraw();
@@ -291,7 +302,7 @@ void page5(int& value)
 			break;
 		}
 		Sleep(100 / mapsg.speed);
-		EndBatchDraw();
+		EndBatchDraw();  //绘制界面
 	}
 	closegraph();
 	return pages(value);
@@ -300,6 +311,7 @@ void page5(int& value)
 void page6(int& value)
 {
 	Sleep(100);
+
 	char widthstr[5];
 	char heightstr[5];
 	char blocksize[5];
@@ -309,10 +321,11 @@ void page6(int& value)
 	InputBox(blocksize, 5, "Input the block size");
 	width = atoi(widthstr);
 	height = atoi(heightstr);
-	blocksizeint = atoi(blocksize);
+	blocksizeint = atoi(blocksize);  //用户设置
+
 	randomsg.setAll(width, height, blocksizeint);
 	randomsg.loadscore("R");
-	randomsg.placeobstacle();
+	randomsg.placeobstacle();  //生成障碍物
 	randomsg.placefood();
 	while (true)
 	{
@@ -332,7 +345,7 @@ void page6(int& value)
 			break;
 		}
 		Sleep(100 / randomsg.speed);
-		EndBatchDraw();
+		EndBatchDraw();  //绘制界面
 	}
 	closegraph();
 	return pages(value);
@@ -341,6 +354,7 @@ void page6(int& value)
 void page7(int& value)
 {
 	Sleep(100);
+
 	char widthstr[5];
 	char heightstr[5];
 	char blocksize[5];
@@ -350,11 +364,12 @@ void page7(int& value)
 	InputBox(blocksize, 5, "Input the block size");
 	width = atoi(widthstr);
 	height = atoi(heightstr);
-	blocksizeint = atoi(blocksize);
+	blocksizeint = atoi(blocksize);  //用户设置
+
 	gravitysg.setAll(width, height, blocksizeint);
 	gravitysg.loadscore("G");
-	gravitysg.setmovetime();
-	gravitysg.placeobstacle();
+	gravitysg.setmovetime();  //设置障碍物移动时间
+	gravitysg.placeobstacle();  //生成障碍物
 	gravitysg.placefood();
 	while (true)
 	{
@@ -375,7 +390,7 @@ void page7(int& value)
 			break;
 		}
 		Sleep(100 / gravitysg.speed);
-		EndBatchDraw();
+		EndBatchDraw();  //绘制界面
 	}
 	closegraph();
 	return pages(value);

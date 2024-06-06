@@ -35,7 +35,7 @@ MapSnakeGame::MapSnakeGame(int width, int height, int blocksize) : SnakeGame(wid
 
 void SnakeGame::setAll(int width, int height, int blocksize)
 {
-	//设置游戏参数
+	//保证游戏参数在合理范围内
 	if (width * blocksize > 0.8 * WINDOW_WIDTH || height * blocksize > 0.9 * WINDOW_HEIGHT)
 	{
 		this->blocksize = MINBLOCKSIZE;
@@ -100,39 +100,33 @@ void SnakeGame::drawmap()
 
 void SnakeGame::drawother()
 {
-	//绘制蛇头为蓝色圆形，蛇身为蓝色方块
 	setfillcolor(BLUE);
-	fillcircle(snake[0].x * (blocksize + 1) + blocksize / 2, snake[0].y * (blocksize + 1) + blocksize / 2, blocksize / 2);
+	fillcircle(snake[0].x * (blocksize + 1) + blocksize / 2, snake[0].y * (blocksize + 1) + blocksize / 2, blocksize / 2);	//绘制蛇头为蓝色圆形，蛇身为蓝色方块
 	for (int i = 1; i < snake.size(); i++)
 	{
 		solidrectangle(snake[i].x * (blocksize + 1), snake[i].y * (blocksize + 1), (snake[i].x + 1) * (blocksize + 1), (snake[i].y + 1) * (blocksize + 1));
 	}
-	//绘制特殊食物为红色圆形
 	setfillcolor(RED);
-	fillcircle(specialfood.x * (blocksize + 1) + blocksize / 2, specialfood.y * (blocksize + 1) + blocksize / 2, blocksize / 2);
-	//绘制食物为绿色圆形
+	fillcircle(specialfood.x * (blocksize + 1) + blocksize / 2, specialfood.y * (blocksize + 1) + blocksize / 2, blocksize / 2);	//绘制特殊食物为红色圆形
 	setfillcolor(GREEN);
-	fillcircle(food.x * (blocksize + 1) + blocksize / 2, food.y * (blocksize + 1) + blocksize / 2, blocksize / 2);
-	//绘制障碍物为棕色方块
+	fillcircle(food.x * (blocksize + 1) + blocksize / 2, food.y * (blocksize + 1) + blocksize / 2, blocksize / 2);	//绘制食物为绿色圆形
 	setfillcolor(BROWN);
 	for (int i = 0; i < obstacles.size(); i++)
 	{
 		solidrectangle(obstacles[i].x * (blocksize + 1), obstacles[i].y * (blocksize + 1), (obstacles[i].x + 1) * (blocksize + 1), (obstacles[i].y + 1) * (blocksize + 1));
-	}
-	//绘制分数，最高分，文字颜色为白色，字体大小为buttongap1/2，显示在屏幕正右侧
+	}	//绘制障碍物为棕色方块
 	settextcolor(WHITE);
 	settextstyle(buttongap1 / 2, 0, _T("宋体"));
 	string scorestr = "Score: " + to_string(score);
-	outtextxy(width * (blocksize + 1) + buttongap1 / 2, buttongap1 / 2, scorestr.c_str());
+	outtextxy(width * (blocksize + 1) + buttongap1 / 2, buttongap1 / 2, scorestr.c_str());	//绘制分数
 	string maxscorestr = "Max Score: " + to_string(maxscore);
-	outtextxy(width * (blocksize + 1) + buttongap1 / 2, 5 * buttongap / 2, maxscorestr.c_str());
+	outtextxy(width * (blocksize + 1) + buttongap1 / 2, 5 * buttongap / 2, maxscorestr.c_str());	//绘制历史最高分
 }
 
 void SnakeGame::snakemove() {
-	//蛇移动，循环边界条件
 	Position head = snake[0];
-	playerinput();
-	switch (direction)
+	playerinput();  //玩家输入
+	switch (direction)  //根据方向移动蛇头
 	{
 	case 0://上
 		head.y = head.y > 0 ? head.y - 1 : height - 1;
@@ -155,35 +149,35 @@ void SnakeGame::snakemove() {
 
 void SnakeGame::playerinput()
 {
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000 || GetAsyncKeyState(0x41) & 0x8000) {
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000 || GetAsyncKeyState(0x41) & 0x8000) {  //左
 		if (direction != 1)
 		{
 			direction = 3;
 			Useabletimes++;
 		}
 	}
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000 || GetAsyncKeyState(0x44) & 0x8000) {
+	if (GetAsyncKeyState(VK_RIGHT) & 0x8000 || GetAsyncKeyState(0x44) & 0x8000) {  //右
 		if (direction != 3)
 		{
 			direction = 1;
 			Useabletimes++;
 		}
 	}
-	if (GetAsyncKeyState(VK_UP) & 0x8000 || GetAsyncKeyState(0x57) & 0x8000) {
+	if (GetAsyncKeyState(VK_UP) & 0x8000 || GetAsyncKeyState(0x57) & 0x8000) {  //上
 		if (direction != 2)
 		{
 			direction = 0;
 			Useabletimes++;
 		}
 	}
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000 || GetAsyncKeyState(0x53) & 0x8000) {
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000 || GetAsyncKeyState(0x53) & 0x8000) {  //下
 		if (direction != 0)
 		{
 			direction = 2;
 			Useabletimes++;
 		}
 	}
-	if (GetAsyncKeyState(0x50) & 0x8000 || GetAsyncKeyState(VK_SPACE) & 0x8000) {
+	if (GetAsyncKeyState(0x50) & 0x8000 || GetAsyncKeyState(VK_SPACE) & 0x8000) {  //暂停
 		MessageBox(NULL, _T("Press P or SPACE again to continue"), _T("Pause"), MB_OK);
 		while (true)
 		{
@@ -247,20 +241,17 @@ bool SnakeGame::isSnakeBody(Position pos)
 
 void SnakeGame::placefood()
 {
-	//设置随机种子
-	srand((unsigned)time(NULL));
-	//随机生成食物位置，不能与蛇身、障碍物，特殊食物重合
+	srand((unsigned)time(NULL));  //设置随机种子
 	do
 	{
 		food.x = rand() % width;
 		food.y = rand() % height;
-	} while (isSnake(food) || isObstacle(food) || isSpecialFood(food));
+	} while (isSnake(food) || isObstacle(food) || isSpecialFood(food));  //随机生成食物位置，不能与蛇身、障碍物，特殊食物重合
 }
 
 void SnakeGame::placespecialfood()
 {
-	//当上一个特殊食物被吃掉或者超过时间限制，分数为7的倍数（不包括0），随机生成特殊食物位置，不能与蛇身、障碍物、食物重合
-	if (score % 7 == 0 && score != 0 && lastscore != score && !is_specialfood_eff)
+	if (score % 7 == 0 && score != 0 && lastscore != score && !is_specialfood_eff)  //当上一个特殊食物被吃掉或者超过时间限制，分数为7的倍数（不包括0），随机生成特殊食物位置，不能与蛇身、障碍物、食物重合
 	{
 		srand((unsigned)time(NULL));
 		do
@@ -268,17 +259,16 @@ void SnakeGame::placespecialfood()
 			specialfood.x = rand() % width;
 			specialfood.y = rand() % height;
 		} while (isSnake(specialfood) || isObstacle(specialfood) || isFood(specialfood));
-		LastsfoodPlaceTime = chrono::system_clock::now();
+		LastsfoodPlaceTime = chrono::system_clock::now();  //记录生成特殊食物的时间
 		is_specialfood_eff = true;
 	}
 }
 
 void SnakeGame::gameover()
 {
-	//游戏结束，蛇头碰到蛇身,障碍物
-	if (isSnakeBody(snake[0]) || isObstacle(snake[0]) || snake.size() == width * height)
+	if (isSnakeBody(snake[0]) || isObstacle(snake[0]) || snake.size() == width * height)  //游戏结束，蛇头碰到蛇身,障碍物
 	{
-		if (Useabletimes > 0) 
+		if (Useabletimes > 0)  //如果操作次数大于0，则允许游戏结束
 		{
 			isGameOver = true;
 			if (score > maxscore)
@@ -291,32 +281,29 @@ void SnakeGame::gameover()
 
 void SnakeGame::afterEatfood()
 {
-	//吃到食物，蛇身增长，分数增加，食物重置
 	if (isFood(snake[0]))
 	{
 		score++;
 		placefood();
-	}
-	//吃到特殊食物，分数增加，食物重置
+	}	//吃到食物，分数增加，食物重置
 	if (isSpecialFood(snake[0]) && is_specialfood_eff == true)
 	{
-		//分数增加值为特殊食物Lifetime-存在时间的秒数的3倍
-        score += (chrono::duration_cast<chrono::seconds>(sfoodLifeTime - (chrono::system_clock::now() - LastsfoodPlaceTime)).count()) * 3;
+        score += (chrono::duration_cast<chrono::seconds>(sfoodLifeTime - (chrono::system_clock::now() - LastsfoodPlaceTime)).count()) * 3;	//吃到特殊食物，分数增加，食物重置
 		lastscore = score;
 		is_specialfood_eff = false;
 		specialfood = { -1,-1 };
-	}
+	}	//吃到特殊食物，分数增加，食物重置
 	if (is_specialfood_eff && chrono::duration_cast<chrono::seconds>(chrono::system_clock::now() - LastsfoodPlaceTime) > sfoodLifeTime)
 	{
 		lastscore = score;
 		is_specialfood_eff = false;
 		specialfood = { -1,-1 };
-	}
+	}	//特殊食物超过时间限制，特殊食物失效
 }
 
 void SnakeGame::savescore(string mark)
 {
-	//保存文件名为mark_width_height.txt，内容为width、height、maxscore
+	//保存文件名为mark_width_height.txt，内容为maxscore
 	ofstream file("snake/scores/" + mark + "_" + to_string(width) + "_" + to_string(height) + ".txt");
 	file << maxscore << endl;
 	file.close();
@@ -325,7 +312,7 @@ void SnakeGame::savescore(string mark)
 
 void SnakeGame::loadscore(string mark)
 {
-	//读取文件名为mark_width_height.txt，内容为width、height、score、maxscore
+	//读取文件名为mark_width_height.txt，内容为maxscore
 	ifstream file("snake/scores/" + mark + "_" + to_string(width) + "_" + to_string(height) + ".txt");
 	if (!file.is_open())
 	{
@@ -380,7 +367,7 @@ void GravitySnakeGame::setmovetime()
 
 void GravitySnakeGame::obstaclemove()
 {
-	//障碍物移动，每次移动一格，移动到最底行时消失
+	//障碍物移动，每次移动一格，移动到最底行时回到最顶行
 	if (chrono::duration_cast<chrono::seconds>(chrono::system_clock::now() - LastobstacleMoveTime) > obstacleMoveTime)
 	{
 		for (int i = 0; i < obstacles.size(); i++)
@@ -409,7 +396,7 @@ void EditSnakeGame::setonlymap()
 
 void EditSnakeGame::placeobstacle()
 {
-	//在地图区域内鼠标左键点击位置生成障碍物
+	//在地图区域内鼠标左键点击位置生成或删除障碍物
 	if (mouse.x < width * (MINBLOCKSIZE + 1) && mouse.y < height * (MINBLOCKSIZE + 1) && mouse.uMsg == WM_LBUTTONDOWN)
 	{
 		Position pos = { mouse.x / (MINBLOCKSIZE + 1), mouse.y / (MINBLOCKSIZE + 1) };
@@ -433,7 +420,7 @@ void EditSnakeGame::placeobstacle()
 
 void EditSnakeGame::savemap(string filename)
 {
-	//保存地图，文件名为map_width_height.txt，内容为width、height、obstacles
+	//保存地图，文件名为filename_width_height.txt，内容为width、height、obstacles
 	ofstream file("snake/maps/" + filename + ".txt");
 	file << width << endl;
 	file << height << endl;
@@ -460,14 +447,14 @@ void EditSnakeGame::drawobstacle()
 
 void MapSnakeGame::loadmap(string filename)
 {
-	//读取地图，文件名为map_width_height.txt，内容为width、height、obstacles
+	//读取地图，文件名为filename_width_height.txt，内容为width、height、obstacles
 	ifstream file("snake/maps/" + filename + ".txt");
 	if (!file.is_open())
 	{
 		MessageBox(GetHWnd(), "File not found", "Error", MB_OK);
 		setAll(12, 12, 20);
 		return;
-	}
+	}  //如果文件不存在则创建默认文件
 	file >> width;
 	file >> height;
 	obstacles.clear();
@@ -493,9 +480,8 @@ void MapSnakeGame::loadmap(string filename)
 			}
 		}
 		return;
-	}
+	}  //如果地图过大，删除超出部分
 	loadscore(filename);
 	//初始化其他参数
 	setAll(width, height, 20);
 }
-

@@ -1,6 +1,5 @@
 #include "UI.h"
 
-// 定义全局变量表明窗口的宽度和高度
 int WINDOW_WIDTH = 1080;
 int WINDOW_HEIGHT = 960;
 int MOUSE_X;
@@ -12,7 +11,6 @@ int MAX_WIDTH = 1080;
 int MAX_HEIGHT = 960;
 MOUSEMSG mouse;
 
-// 定义函数设置窗口的宽度和高度并绘制窗口
 void setWindowSize(int width, int height)
 {
 	setMaxWindowSize();
@@ -21,26 +19,26 @@ void setWindowSize(int width, int height)
     buttongap1 = WINDOW_HEIGHT / 16;
     buttongap = WINDOW_HEIGHT / 13;
     buttonwidth = WINDOW_WIDTH / 4;
-    initgraph(WINDOW_WIDTH, WINDOW_HEIGHT);
+	initgraph(WINDOW_WIDTH, WINDOW_HEIGHT);  // 初始化绘图窗口
 }
 
 void setMaxWindowSize()
 {
-    RECT desktop;
-    const HWND hDesktop = GetDesktopWindow();
-    GetWindowRect(hDesktop, &desktop);
+	RECT desktop;  // 获取桌面窗口的大小
+	const HWND hDesktop = GetDesktopWindow();  // 获取桌面窗口的句柄
+	GetWindowRect(hDesktop, &desktop);  // 获取桌面窗口的大小
     MAX_WIDTH = 0.9 * (desktop.right - desktop.left);
     MAX_HEIGHT = 0.9 * (desktop.bottom - desktop.top);
 }
-// 定义函数获取鼠标的位置
+
 void getMousePosition()
 {
-	if (MouseHit())
+	if (MouseHit())  // 如果有鼠标消息
 	{
 		mouse = GetMouseMsg();
 		MOUSE_X = mouse.x;
 		MOUSE_Y = mouse.y;
-		FlushMouseMsgBuffer();
+		FlushMouseMsgBuffer();  // 清空鼠标消息缓冲区
 	}
 }
 
@@ -73,21 +71,19 @@ void Button::setAll(int x, int y, int width, int height, string text, int color,
 	this->text_y = y + height / 2 - text_size / 2;
 }
 
-// 实现按钮类的绘制函数
 void Button::draw()
 {
     setfillcolor(color);
-    fillrectangle(x, y, x + width, y + height);
+	fillrectangle(x, y, x + width, y + height);  // 绘制按钮背景矩形
     setbkmode(TRANSPARENT);
     settextstyle(text_size, 0, _T("宋体"));
     settextcolor(text_color);
-    outtextxy(text_x, text_y, text.c_str());
+	outtextxy(text_x, text_y, text.c_str());  // 绘制按钮文本
 }
 
-// 实现按钮类的鼠标点击判断函数
 bool Button::isClicked()
 {
-    if (boolIsMouseOn() && mouse.uMsg == WM_LBUTTONDOWN)
+	if (boolIsMouseOn() && mouse.uMsg == WM_LBUTTONDOWN)  // 如果鼠标左键按下且鼠标在按钮上
     {
         return true;
     }
@@ -97,10 +93,9 @@ bool Button::isClicked()
     }
 }
 
-// 实现按钮类的获取鼠标是否在按钮上函数
 bool Button::boolIsMouseOn()
 {
-	if (mouse.x >= x && mouse.x <= x + width && mouse.y >= y && mouse.y <= y + height)
+	if (mouse.x >= x && mouse.x <= x + width && mouse.y >= y && mouse.y <= y + height)  // 如果鼠标在按钮上
 	{
 		return true;
 	}
@@ -172,34 +167,33 @@ void Slider::setAll(int x, int y, int width, int height, int color, int slider_c
 	this->slider_value_text_x = slider_button_x - text_size * slider_value_text.length() / 4;
 	this->slider_value_text_y = y + 3 * height / 2;
 }
-// 实现滑动条类的绘制函数
+
 void Slider::draw()
 {
-	if (isClicked())
+	if (isClicked())  // 如果滑动条被点击，则更新滑动条的位置
 	{
 		this->slider_button_x = (MOUSE_X - slider_button_width / 2);
 		this->slider_width = (MOUSE_X - x);
 	}
-    calculateTextPosition();
+	calculateTextPosition();  // 计算文本的位置
     setfillcolor(color);
-    fillrectangle(x, y, x + width, y + height);
+	fillrectangle(x, y, x + width, y + height);  // 绘制滑动条背景矩形
     setfillcolor(slider_color);
-    fillrectangle(x, y, x + slider_width, y + slider_height);
+	fillrectangle(x, y, x + slider_width, y + slider_height);  // 绘制滑动条矩形
     setfillcolor(slider_button_color);
-    fillrectangle(slider_button_x, slider_button_y, slider_button_x + slider_button_width, slider_button_y + slider_button_height);
+	fillrectangle(slider_button_x, slider_button_y, slider_button_x + slider_button_width, slider_button_y + slider_button_height);  // 绘制滑动条按钮
     setbkmode(TRANSPARENT);
     settextstyle(text_size, 0, _T("宋体"));
     settextcolor(text_color);
     outtextxy(slider_title_x, slider_title_y, slider_title.c_str());
     outtextxy(slider_left_text_x, slider_left_text_y, slider_left_text.c_str());
     outtextxy(slider_right_text_x, slider_right_text_y, slider_right_text.c_str());
-    outtextxy(slider_value_text_x, slider_value_text_y, slider_value_text.c_str());
+	outtextxy(slider_value_text_x, slider_value_text_y, slider_value_text.c_str());  // 绘制滑动条文本
 }
 
-// 实现滑动条类的鼠标点击判断函数
 bool Slider::isClicked()
 {
-    if (boolIsMouseOn() && mouse.mkLButton)
+	if (boolIsMouseOn() && mouse.mkLButton)  // 如果鼠标左键按下且鼠标在滑动条上
     {
         return true;
     }
@@ -209,10 +203,9 @@ bool Slider::isClicked()
     }
 }
 
-//实现获取鼠标是否在滑动条上函数
 bool Slider::boolIsMouseOn()
 {
-	if (MOUSE_X >= x && MOUSE_X <= x + width && MOUSE_Y >= y && MOUSE_Y <= y + height)
+	if (MOUSE_X >= x && MOUSE_X <= x + width && MOUSE_Y >= y && MOUSE_Y <= y + height)  // 如果鼠标在滑动条上
 	{
 		return true;
 	}
@@ -222,13 +215,13 @@ bool Slider::boolIsMouseOn()
 	}
 }
 
-//实现读取滑动条值字符串函数
+//实现读取滑动条值字符串
 string Slider::loadValueStr()
 {
 	return slider_value_text;
 }
 
-//实现滑动条类计算文本坐标函数
+//计算文本坐标
 void Slider::calculateTextPosition()
 {
 	double slider_left_text_double = atof(slider_left_text.c_str());

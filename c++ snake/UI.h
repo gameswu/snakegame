@@ -8,7 +8,7 @@
 
 using namespace std;
 
-//定义全局变量表明窗口的宽度和高度
+//定义全局变量表明绘制参量
 extern int WINDOW_WIDTH;
 extern int WINDOW_HEIGHT;
 extern int MAX_WIDTH;
@@ -20,12 +20,10 @@ extern int buttongap1;
 extern int buttonwidth;
 extern MOUSEMSG mouse;
 
-//定义函数设置窗口的宽度和高度
-void setWindowSize(int width, int height);
-void setMaxWindowSize();
+void setWindowSize(int width, int height);  //设置窗口的宽度和高度
+void setMaxWindowSize();  //读取屏幕允许窗口的最大宽度和高度
 
-//定义函数获取鼠标的位置
-void getMousePosition();
+void getMousePosition();  //获取鼠标的位置
 
 //定义按钮类
 class Button
@@ -39,10 +37,10 @@ private:
 	int text_x, text_y;
 public:
 	Button(int x, int y, int width, int height, string text, int color, int text_color, int text_size); 
-	void draw();
-	bool isClicked();
-	bool boolIsMouseOn();
-	void setAll(int x, int y, int width, int height, string text, int color, int text_color, int text_size);
+	void draw();  //绘制按钮
+	bool isClicked();  //判断按钮是否被点击
+	bool boolIsMouseOn();  //判断鼠标是否在按钮上
+	void setAll(int x, int y, int width, int height, string text, int color, int text_color, int text_size);  //设置按钮的所有参数
 };
 
 //定义滑动条类
@@ -75,12 +73,12 @@ private:
 	string slider_value_text;
 public:
     Slider(int x, int y, int width, int height, int color, int slider_color, int slider_button_color, int text_color, string slider_title, string slider_left_text, string slider_right_text);
-    void draw();
-    bool isClicked();
-	bool boolIsMouseOn();
-	string loadValueStr();
-	void calculateTextPosition();
-	void setAll(int x, int y, int width, int height, int color, int slider_color, int slider_button_color, int text_color, string slider_title, string slider_left_text, string slider_right_text, string slider_value_text);
+	void draw();  //绘制滑动条
+	bool isClicked();  //判断滑动条是否被点击
+	bool boolIsMouseOn();  //判断鼠标是否在滑动条上
+	string loadValueStr();  //读取滑动条的设置值
+	void calculateTextPosition();  //计算文本的位置
+	void setAll(int x, int y, int width, int height, int color, int slider_color, int slider_button_color, int text_color, string slider_title, string slider_left_text, string slider_right_text, string slider_value_text);  //设置滑动条的所有参数
 };
 
 #endif UI_H

@@ -14,9 +14,9 @@
 
 using namespace std;
 
-void initialfiles();
+void initialfiles();  //初始化文件系统
 
-void savesettings(string speed, string difficulty, int windowwidth, int windowheight);
-void loadsettings(string& speed, string& difficulty, int& windowwidth, int& windowheight);
+void savesettings(string speed, string difficulty, int windowwidth, int windowheight);	//保存设置
+void loadsettings(string& speed, string& difficulty, int& windowwidth, int& windowheight);	//读取设置
 
 #endif FILEIO_H

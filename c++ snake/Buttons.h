@@ -17,9 +17,10 @@ extern Button setwindowsizebutton;
 
 extern Slider speedslider;
 extern Slider difficultyslider;
+
 extern string speedstr;
 extern string difficultystr;
 
-void initialButtons();
+void initialButtons();  //初始化按钮和滑动条
 
 #endif TITLEPAGE_H
