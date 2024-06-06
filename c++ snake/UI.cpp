@@ -29,8 +29,8 @@ void setMaxWindowSize()
     RECT desktop;
     const HWND hDesktop = GetDesktopWindow();
     GetWindowRect(hDesktop, &desktop);
-    MAX_WIDTH = desktop.right - desktop.left;
-    MAX_HEIGHT = desktop.bottom - desktop.top;
+    MAX_WIDTH = 0.95 * (desktop.right - desktop.left);
+    MAX_HEIGHT = 0.95 * (desktop.bottom - desktop.top);
 }
 // 定义函数获取鼠标的位置
 void getMousePosition()
