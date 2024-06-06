@@ -480,22 +480,22 @@ void MapSnakeGame::loadmap(string filename)
 	} while (!file.eof());
 	file.close();
 	file.clear();
+	if (width * blocksize > 0.8 * WINDOW_WIDTH || height * blocksize > 0.9 * WINDOW_HEIGHT)
+	{
+		MessageBox(GetHWnd(), "Map size is too large", "Error", MB_OK);
+		setAll(12, 12, 20);
+		for (int i = 0; i < obstacles.size(); i++)
+		{
+			if (obstacles[i].x >= width || obstacles[i].y >= height)
+			{
+				obstacles.erase(obstacles.begin() + i);
+				i--;
+			}
+		}
+		return;
+	}
 	loadscore(filename);
 	//初始化其他参数
-	score = 0;
-	lastscore = -1;
-	direction = 0;
-	is_specialfood_eff = false;
-	Useabletimes = 0;
-	snake.clear();
-	snake.push_back({ width / 2, height / 2 });
-	food = { -1,-1 };
-	specialfood = { -1,-1 };
-	isGameOver = false;
-	LastsfoodPlaceTime = chrono::system_clock::now();
-	speed = stod(speedstr);
-	difficulty = stod(difficultystr);
-	placefood();
-	placespecialfood();
+	setAll(width, height, 20);
 }
 
