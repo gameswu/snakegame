@@ -3,8 +3,11 @@
 void pages(int& pagenum)
 {
 	loadsettings(speedstr, difficultystr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	setWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	initialButtons();
+	if (pagenum == 0)
+	{
+		setWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		initialButtons();
+	}  //只有回到初始页才设置窗口大小
 	switch (pagenum)
 	{
 	case 0:
@@ -75,7 +78,6 @@ void page0(int& value)
 			exit(0);
 		}
 	}//判断按钮是否被点击并执行相应操作
-	closegraph();
 	Sleep(100);
 	return pages(value);
 }
@@ -132,7 +134,6 @@ void page1(int& value)
 			break;
 		}
 	}  //判断按钮是否被点击并执行相应操作
-	closegraph();
 	return pages(value);
 }
 
@@ -181,7 +182,6 @@ void page2(int& value)
 		}
 		Sleep(70);
 	}  //判断按钮是否被点击并执行相应操作
-	closegraph();
 	return pages(value);
 }
 
@@ -232,7 +232,6 @@ void page3(int& value)
 		}
 		Sleep(10);
 	}  //判断按钮是否被点击并执行相应操作
-	closegraph();
 	return pages(value);
 }
 
@@ -273,7 +272,6 @@ void page4(int& value)
 		Sleep(100 / defaultsg.speed); //速度
 		EndBatchDraw(); //绘制界面
 	}
-	closegraph();
 	return pages(value);
 }
 
@@ -304,7 +302,6 @@ void page5(int& value)
 		Sleep(100 / mapsg.speed);
 		EndBatchDraw();  //绘制界面
 	}
-	closegraph();
 	return pages(value);
 }
 
@@ -347,7 +344,6 @@ void page6(int& value)
 		Sleep(100 / randomsg.speed);
 		EndBatchDraw();  //绘制界面
 	}
-	closegraph();
 	return pages(value);
 }
 
@@ -392,6 +388,5 @@ void page7(int& value)
 		Sleep(100 / gravitysg.speed);
 		EndBatchDraw();  //绘制界面
 	}
-	closegraph();
 	return pages(value);
 }
