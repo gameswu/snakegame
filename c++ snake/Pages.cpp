@@ -78,7 +78,6 @@ void page0(int& value)
 			exit(0);
 		}
 	}//判断按钮是否被点击并执行相应操作
-	Sleep(100);
 	return pages(value);
 }
 
